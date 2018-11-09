@@ -1,0 +1,156 @@
+.App{
+    background-color: azure;
+    width:65%;
+    min-width: 800px;
+    left:17.5%;
+    height:85%;
+    top:7.5%;
+    position: absolute;
+    overflow: hidden;
+}
+.left{
+    width:30%;
+    float:left;
+    height:100%;
+    overflow: auto;
+    border-right: solid 1px cyan;
+}
+.right{
+    height:100%;
+    overflow: hidden;
+}
+.self_head{
+    box-sizing: border-box;
+    padding:10px 0px 10px 10px;
+}
+.self_search input{
+    outline: none;
+}
+.self_group{
+    overflow: auto;
+}
+.show{
+    height:calc(100% - 100px);
+}
+.show_top{
+    height:60px;
+    border-bottom:solid 1px #585eaa;
+}
+.show_body{
+    height:calc(100% - 60px);
+    overflow: auto;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    overflow-y: scroll;
+}
+.send{
+    height:100px;
+    border-top:solid 1px #585eaa;
+}
+.send_login{
+    height:100px;
+    line-height: 100px;
+    font-size: 18px;
+    text-align: center;
+}
+.login_click{
+    color:#33a3dc;
+    font-weight: bold;
+    font-size: 20px;
+}
+.login_draw .ant-drawer-content-wrapper{
+   left:30%;
+   width:500px;
+   height:300px !important;
+}
+.login .ant-tabs-tab{
+    margin:0px 70px;
+    font-size: 18px;
+    padding-top:0px;
+    font-weight: bold;
+}
+.login_log{
+    width:360px;
+    margin:auto;
+}
+.login_log input{
+    margin-bottom: 20px;
+    height:35px;
+}
+.send_top{
+    padding:10px 0px 0px 10px;
+    margin-bottom:10px;
+}
+.send_input{
+    height:45px;
+    
+}
+.bqb_image{
+    width:120px;
+    margin:10px;
+    border-radius: 3px;
+    
+}
+.bqb_image:hover{
+    width:125px;
+    margin:5px;
+    box-shadow: 5px 5px 10px #d3d7d4,-3px -3px 10px #d3d7d4;
+}
+.bqb_foot{
+    text-align: center;
+    padding-top:20px;
+}
+.mes_header{
+    width:80px;
+    padding:10px;
+    
+}
+.mes_headerimg{
+    width:60px;
+    border-radius: 50%;
+}
+.mes_body{
+   width:60%;
+    margin-left:80px;
+    padding-top:15px;
+}
+.mes_headtop{
+    width:100%;
+}
+.mes_desc{ 
+    display: inline-block;
+    border-radius: 10px;
+    padding: 14px 14px 0px 14px;  
+    min-height: 40px;
+}
+.mes_left,.mes_right{
+    width:100%;
+    overflow: hidden;
+}
+.mes_left .mes_desc{
+    background-color:#FFDEAD;
+}
+.mes_right .mes_desc{
+    background-color:#7bbfea;
+}
+.mes_left .mes_header{
+    float:left;
+}
+.mes_right .mes_header,.mes_right .mes_body,.mes_right .mes_headtop,.mes_right .mes_desc,.mes_right .mes_name,.mes_right .mes_time{
+    float:right;
+}
+.mes_img{
+    width:100%;
+    margin-bottom: 14px;
+    
+}
+.search{
+    width:250px;
+    overflow: hidden;
+}
+.search .ant-tabs-tab{
+    margin:0px 30px;
+    font-size: 14px;
+    padding-top:0px;
+    font-weight: bold;
+}
