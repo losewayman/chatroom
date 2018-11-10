@@ -2,13 +2,12 @@
 function islogin(data){
     console.log(data);
     return {
-        type:"login",
+        type:"islogin",
         data
     }
 }
 
 function socket(data){
-    console.log(data);
     return {
         type:"socket",
         data
@@ -21,15 +20,49 @@ function addmes(data){
         data
     }
 }
+
 function scroll(data){
     return {
         type:'scroll',
         data
     }
 }
+
 function search(data){
     return {
         type:'search',
+        data
+    }
+}
+
+function selfmes(data){
+    return {
+        type:'selfmes',
+        data
+    }
+}
+
+function grouplist(data){
+    return {
+        type:'grouplist',
+        data
+    }
+}
+function logindraw(data){
+    return {
+        type:'logindraw',
+        data
+    }
+}
+function nowgroup(data){
+    return {
+        type:"nowgroup",
+        data
+    }
+}
+function groupmes(data){
+    return {
+        type:'groupmes',
         data
     }
 }
@@ -39,6 +72,11 @@ const action={
     socket:socket,
     addmes:addmes,
     scroll:scroll,
-    search:search
+    search:search,
+    selfmes:selfmes,
+    grouplist:grouplist,
+    logindraw:logindraw,
+    nowgroup:nowgroup,
+    groupmes:groupmes
 }
 export default action;

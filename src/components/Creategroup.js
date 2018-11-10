@@ -8,15 +8,24 @@ const TabPane = Tabs.TabPane;
 class Search extends Component {
   constructor(props){
     super(props);
+    this.state={
+        groupname:''
+    }
   }
 
-  join = (id) => {
+  gchange = (e) => {
+      this.setState({
+          groupname:e.target.value
+      })
+  }
+
+  gcreate = () => {
       axios({
-          method:'post',
+          method:"post",
           url:'',
           data:{
-            groupid:id,
-            useraccount:this.props.myself.account
+              geoupname:this.state.groupname,
+              creater:this.props.myself.account,
           }
       })
       .then((res)=>{
@@ -31,17 +40,9 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="search" >
-        {this.props.group.searchmes.map((sear,index)=>
-        (
-            <div className="search_li" key={index}>
-            {/* src={sear.groupimg} {sear.groupname}*/}
-                <div><img  src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/></div> 
-                <div>grtrtetetetetetetetetetetetetetetetetettr</div>
-                <Button type="primary" onClick={this.join(sear.id)}>加 入</Button>
-            </div>
-        )
-        )}
+      <div className="create" >
+        <Input placeholder="在这里输入群名" value={this.state.groupname} onChange={this.gchange} onPressEnter={this.gcreate}/>
+        <Button type="primary" style={{float:'right'}} onClick={this.gcreate}>创 建</Button>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Radio, Icon, Drawer, Tabs, Input } from 'antd';
+import { Button, Radio, Icon, Drawer, Tabs, Input, message } from 'antd';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import action from '../actions/index';
 
 const TabPane = Tabs.TabPane;
 
@@ -49,14 +51,21 @@ class Login extends Component {
   login = () => {
       axios({
           method:"post",
-          url:"",//http://localhost:8110/users/islogin
+          url:"http://localhost:8110/users/login",
           data:{
               account:this.state.login_acc,
               password:this.state.login_pass
-          }
+          },
+          withCredentials: true,
       })
       .then((res)=>{
-          console.log(res);
+          if(res.data.status=='200'){
+              this.props.selfmes(res.data.user);
+              this.props.grouplist(res.data.group);
+              this.props.islogin(res.data.islogin);
+              this.props.logindraw(false);
+          }
+          
       })
       .catch((err)=>{
           console.log(err);
@@ -65,7 +74,7 @@ class Login extends Component {
   sign = () => {
     axios({
         method:"post",
-        url:"",//http://localhost:8110/users/islogin
+        url:"http://localhost:8110/users/sign",
         data:{
             account:this.state.sign_acc,
             password:this.state.sign_pass,
@@ -73,9 +82,22 @@ class Login extends Component {
         }
     })
     .then((res)=>{
-        console.log(res);
+        if(res.data.status=='200'){
+            this.setState({
+                sign_acc:'',
+                sign_name:'',
+                sign_pass:''
+            })
+            message.success("注册成功");
+        }else if(res.data.status=='100'){
+            message.warning("账号或昵称已存在");
+        }
+        else{
+            message.error("注册失败");
+        }
     })
     .catch((err)=>{
+        message.error("注册失败");
         console.log(err);
     })
 }
@@ -86,16 +108,16 @@ class Login extends Component {
         <Tabs defaultActiveKey="1">
             <TabPane tab="登录" key="1">
                 <div className="login_log">
-                    <Input placeholder="请输入账号" onChange={this.loginacc}/>
-                    <Input placeholder="请输入密码" onChange={this.loginpass}/>
+                    <Input placeholder="请输入账号" value={this.state.login_acc}  onChange={this.loginacc}/>
+                    <Input placeholder="请输入密码" value={this.state.login_pass}  onChange={this.loginpass}/>
                     <Button type="primary" block onClick={this.login} >登 录</Button>
                 </div>
             </TabPane>
             <TabPane tab="注册" key="2">
                 <div className="login_log">
-                    <Input placeholder="请输入账号" onChange={this.signacc}/>
-                    <Input placeholder="请输入昵称" onChange={this.signname}/>
-                    <Input placeholder="请输入密码" onChange={this.signpass}/>
+                    <Input placeholder="请输入账号" value={this.state.sign_acc} onChange={this.signacc}/>
+                    <Input placeholder="请输入昵称" value={this.state.sign_name} onChange={this.signname}/>
+                    <Input placeholder="请输入密码" value={this.state.sign_pass} onChange={this.signpass}/>
                     <Button type="primary" block onClick={this.sign} >注 册</Button>
                 </div>
             </TabPane>
@@ -105,4 +127,28 @@ class Login extends Component {
   }
 }
 
-export default Login;
+
+const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
+    
+})
+  
+const mapDispatchToProps = dispatch => ({   //分发action
+    grouplist:(data) => {
+        dispatch(action.grouplist(data));
+    },
+    selfmes:(data) => {
+        dispatch(action.selfmes(data));
+    },
+    islogin:(data) => {
+        dispatch(action.islogin(data));
+    },
+    logindraw:(data) => {
+        dispatch(action.logindraw(data))
+    }
+})
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Login)
+  

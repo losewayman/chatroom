@@ -90,14 +90,15 @@ class Bqb extends Component {
       account:this.props.myself.account,
       name:this.props.myself.name,
       headimg:this.props.myself.headimg,
-      group:this.props.status.nowgroup,
+      group:this.props.groupid,
       mes:'',
       img:img
     }
-    this.props.group.socket.emit('sendmes',message);
+    console.log(message);
+    this.props.socket.emit('sendmes',message);
     this.props.addmes(message);
     setTimeout(()=>{
-      this.props.group.showdiv.scrollTop = this.props.group.showdiv.scrollHeight;
+      this.props.showdiv.scrollTop = this.props.showdiv.scrollHeight;
     },100)
     
   }
@@ -130,8 +131,10 @@ class Bqb extends Component {
 
 const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
   myself:state.myself,
-  group:state.group,
-  status:state.status
+  status:state.status,
+  groupid:state.now.nowgroupid,
+  socket:state.center.socket,
+  showdiv:state.center.showdiv
 })
 
 const mapDispatchToProps = dispatch => ({   //分发action

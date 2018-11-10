@@ -154,3 +154,59 @@
     padding-top:0px;
     font-weight: bold;
 }
+.search{
+    min-height:40px;
+}
+.search_li{
+    width:100%;
+    overflow: hidden;
+    border-bottom: 1px solid #d3d7d4;
+    position: relative;
+}
+.search_li div{
+    display: inline-block;
+    height:40px;
+    line-height: 40px;
+    overflow: hidden;
+    max-width: 50%;
+}
+.search_li img{
+    width:30px;
+    border-radius: 50%;
+}
+.search_li button{
+    padding: 0px 10px;
+    height:30px;
+    position: absolute;
+    right:5%;
+    top:7px;
+}
+.create{
+    overflow: hidden;
+    width:250px;
+    padding-top:10px;
+}
+.create input{
+    height:40px;
+}
+.create button{
+    margin-top:10px;
+}
+.self_group .ant-list-item-meta-description{
+    min-height:32px;
+    line-height: 32px;
+    padding-right: 5px;
+}
+.self_group .ant-list-item:hover{
+    background-color:#AFEEEE; 
+}
+.self_group .ant-list-item:focus{
+    background-color:#7bbfea; 
+}
+.list_tip{
+    width:100%;
+    line-height:60px;
+    text-align: center;
+    height:60px;
+    overflow: hidden;
+}

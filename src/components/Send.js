@@ -18,16 +18,11 @@ class Send extends Component {
     }
   }
   logindraw = () => {
-    console.log(this.props);
-    this.setState({
-      logindraw:true
-    })
+    this.props.logindraw(true);
   }
 
   loginClose = () => {
-    this.setState({
-      logindraw:false
-    })
+    this.props.logindraw(false);
   }
 
   bqbClose = () => {
@@ -46,18 +41,17 @@ class Send extends Component {
       account:this.props.myself.account,
       name:this.props.myself.name,
       headimg:this.props.myself.headimg,
-      group:this.props.status.nowgroup, 
+      group:this.props.groupid, 
       mes:this.state.sendmes,
       img:''
     }
-    this.props.group.socket.emit('sendmes',message);
-    console.log(this.props.group.groupmes);
+    this.props.socket.emit('sendmes',message);
     this.props.addmes(message);
     this.setState({
       sendmes:''
     })
     setTimeout(()=>{
-      this.props.group.showdiv.scrollTop = this.props.group.showdiv.scrollHeight;
+      this.props.showdiv.scrollTop = this.props.showdiv.scrollHeight;
     },100)
   }
 
@@ -81,7 +75,7 @@ class Send extends Component {
           <Input className="send_input" addonAfter={sendbutton} placeholder="发射！" value={this.state.sendmes} onChange={this.sendmes} onPressEnter={this.send}/>
         </div>
         <div style={{display:showmsg}} className="send_login">点击<span className="login_click" onClick={this.logindraw}>登录</span>参与群聊</div>
-        <Drawer  placement='top' closable={false} onClose={this.loginClose} visible={this.state.logindraw} className="login_draw">
+        <Drawer  placement='top' closable={false} onClose={this.loginClose} visible={this.props.status.logindraw} className="login_draw">
           <Login/>
         </Drawer>
         <Drawer placement='left'  closable={false}  onClose={this.bqbClose}  visible={this.state.bqbdraw} width={500}  >
