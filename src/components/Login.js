@@ -3,6 +3,7 @@ import { Button, Radio, Icon, Drawer, Tabs, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import action from '../actions/index';
+import method from './method';
 
 const TabPane = Tabs.TabPane;
 
@@ -49,6 +50,7 @@ class Login extends Component {
   }
 
   login = () => {
+      let _this =this;
       axios({
           method:"post",
           url:"http://localhost:8110/users/login",
@@ -64,6 +66,12 @@ class Login extends Component {
               this.props.grouplist(res.data.group);
               this.props.islogin(res.data.islogin);
               this.props.logindraw(false);
+              if(res.data.group.length!=0){
+                this.props.nowgroup(res.data.group[0]);
+                this.props.socket.emit("join",res.data.group[0]);
+                method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
+              }
+
           }
           
       })
@@ -129,7 +137,7 @@ class Login extends Component {
 
 
 const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
-    
+    socket:state.center.socket
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action
@@ -144,6 +152,12 @@ const mapDispatchToProps = dispatch => ({   //分发action
     },
     logindraw:(data) => {
         dispatch(action.logindraw(data))
+    },
+    nowgroup:(data) => {
+        dispatch(action.nowgroup(data))
+    },
+    groupmes:(data) => {
+        dispatch(action.groupmes(data))
     }
 })
   

@@ -101,18 +101,14 @@
     padding-top:20px;
 }
 .mes_header{
-    width:80px;
+    width:70px;
     padding:10px;
     
 }
-.mes_headerimg{
-    width:60px;
-    border-radius: 50%;
-}
 .mes_body{
    width:60%;
-    margin-left:80px;
-    padding-top:15px;
+    margin-left:70px;
+    padding-top:10px;
 }
 .mes_headtop{
     width:100%;
@@ -120,8 +116,18 @@
 .mes_desc{ 
     display: inline-block;
     border-radius: 10px;
-    padding: 14px 14px 0px 14px;  
+    padding: 12px 12px 0px 12px;  
     min-height: 40px;
+    margin-top:5px;
+}
+.mes_desc p{
+    margin-bottom: 10px;
+}
+.mes_desc img{
+    margin-bottom: 10px;
+}
+.mes_left,.mes_right{
+    margin-top:10px;
 }
 .mes_left,.mes_right{
     width:100%;
@@ -147,6 +153,7 @@
 .search{
     width:250px;
     overflow: hidden;
+    min-height:40px;
 }
 .search .ant-tabs-tab{
     margin:0px 30px;
@@ -154,14 +161,12 @@
     padding-top:0px;
     font-weight: bold;
 }
-.search{
-    min-height:40px;
-}
 .search_li{
     width:100%;
     overflow: hidden;
     border-bottom: 1px solid #d3d7d4;
     position: relative;
+    height: 40px;
 }
 .search_li div{
     display: inline-block;
@@ -169,6 +174,9 @@
     line-height: 40px;
     overflow: hidden;
     max-width: 50%;
+    padding:0px 5px;
+    text-overflow: ellipsis;
+    white-space:nowrap; 
 }
 .search_li img{
     width:30px;
@@ -179,7 +187,7 @@
     height:30px;
     position: absolute;
     right:5%;
-    top:7px;
+    top:5px;
 }
 .create{
     overflow: hidden;

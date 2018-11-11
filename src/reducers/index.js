@@ -82,6 +82,17 @@ function group(state,action){
             list.push(action.data);
             return Object.assign({},state,{groupmes:list})
         }
+        case 'addgrouplist' : {
+            var grlist = state.grouplist;
+            grlist.push(action.data);
+            return Object.assign({},state,{grouplist:grlist})
+        }
+        case 'deletesearchmes' : {
+            var grsearch = state.searchmes;console.log(state.searchmes,grsearch);
+            grsearch.splice(action.data,1);
+            
+            return Object.assign({},state,{searchmes:grsearch})
+        }
         case 'search' : {
             return Object.assign({},state,{searchmes:action.data})
         }

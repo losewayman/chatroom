@@ -66,6 +66,18 @@ function groupmes(data){
         data
     }
 }
+function addgrouplist(data){
+    return {
+        type:'addgrouplist',
+        data
+    }
+}
+function deletesearchmes(data){
+    return {
+        type:'deletesearchmes',
+        data
+    }
+}
 
 const action={
     islogin:islogin,
@@ -77,6 +89,8 @@ const action={
     grouplist:grouplist,
     logindraw:logindraw,
     nowgroup:nowgroup,
-    groupmes:groupmes
+    groupmes:groupmes,
+    addgrouplist:addgrouplist,
+    deletesearchmes:deletesearchmes
 }
 export default action;

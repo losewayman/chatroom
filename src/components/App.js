@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 import './style/App.css'
 import { Button, Radio, Icon, Drawer } from 'antd';
 import axios from 'axios';
+import method from './method';
 
 import io from 'socket.io-client';
  var socket = io('http://localhost:8110');
@@ -27,23 +28,16 @@ class App extends Component {
     let _this = this;
     socket.on('othersendmes',function(data){
       console.log(data);
-      _this.props.addmes(data);
-      setTimeout(()=>{
-        _this.props.showdiv.scrollTop = _this.props.showdiv.scrollHeight;
-      },300)
+      if(data.groupid===_this.props.groupid){
+        _this.props.addmes(data);
+        setTimeout(()=>{
+          _this.props.showdiv.scrollTop = _this.props.showdiv.scrollHeight;
+        },300)
+      }
     })
 
-
-
-
-
-
-
-
-
-
-
     this.props.socket(socket);
+
     axios({
       method:'post',
       url:"http://localhost:8110/users/islogin",
@@ -56,9 +50,9 @@ class App extends Component {
         this.props.selfmes(res.data.user);
         this.props.grouplist(res.data.group);
         if(res.data.group.length!=0){
-          console.log(res.data.group.length);
           this.props.nowgroup(res.data.group[0]);
           socket.emit("join",res.data.group[0]);
+          method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
         }
       }
       console.log(res);
@@ -89,7 +83,8 @@ class App extends Component {
 
 
 const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
-  showdiv:state.center.showdiv
+  showdiv:state.center.showdiv,
+  groupid:state.now.nowgroupid
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action
@@ -111,6 +106,9 @@ const mapDispatchToProps = dispatch => ({   //分发action
     addmes:(data) => {
       dispatch(action.addmes(data))
     },
+    groupmes:(data) => {
+      dispatch(action.groupmes(data))
+  }
 })
   
   export default connect(

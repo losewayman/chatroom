@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import action from '../actions/index';
 import { Button, Radio, Icon, Drawer, Tabs, Input } from 'antd';
 import axios from 'axios';
-import jz from '../img/jz.gif'
+import jz from '../img/jz.gif';
+import method from './method';
 
 const Search = Input.Search;
 
@@ -87,12 +88,13 @@ class Bqb extends Component {
 
   sendimg = (img) =>{
     var message = {
-      account:this.props.myself.account,
-      name:this.props.myself.name,
+      useraccount:this.props.myself.account,
+      username:this.props.myself.name,
       headimg:this.props.myself.headimg,
-      group:this.props.groupid,
-      mes:'',
-      img:img
+      groupid:this.props.groupid,
+      text:null,
+      img:img,
+      time:method.Time()
     }
     console.log(message);
     this.props.socket.emit('sendmes',message);

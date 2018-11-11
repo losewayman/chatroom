@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Radio, Icon, Drawer, Input } from 'antd';
+import { Button, Radio, Icon, Drawer, Input, message } from 'antd';
 import Login from './Login';
 import Bqb from './Bqb';
-
-
+import method from './method';
 
 const Search = Input.Search;
 const { TextArea } = Input;
@@ -37,22 +36,27 @@ class Send extends Component {
     })
   }
   send = () =>{
-    var message = {
-      account:this.props.myself.account,
-      name:this.props.myself.name,
+    if(this.state.sendmes===""){
+      message.warning("写点东西再发吧！");
+    }else{
+    var messages = {
+      useraccount:this.props.myself.account,
+      username:this.props.myself.name,
       headimg:this.props.myself.headimg,
-      group:this.props.groupid, 
-      mes:this.state.sendmes,
-      img:''
+      groupid:this.props.groupid, 
+      text:this.state.sendmes,
+      time:method.Time(),
+      img:null
     }
-    this.props.socket.emit('sendmes',message);
-    this.props.addmes(message);
+    this.props.socket.emit('sendmes',messages);
+    this.props.addmes(messages);
     this.setState({
       sendmes:''
     })
     setTimeout(()=>{
       this.props.showdiv.scrollTop = this.props.showdiv.scrollHeight;
     },100)
+  }
   }
 
   bqb = () =>{
