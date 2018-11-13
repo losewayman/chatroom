@@ -9,13 +9,16 @@ var model = {
     },
     status:{
         islogin:'',
-        logindraw:false
+        logindraw:false,
+        groupdraw:false
     },
     now:{
         nowgroupid:'',
         nowgroupname:'',
         nowgroupcreater:'',
-        information:'',
+        nowgroupimg:'',
+        information:[{},{}],
+        index:0
     },
     group:{
         grouplist:[],
@@ -52,6 +55,9 @@ function status(state,action){
         case 'logindraw' : {
             return Object.assign({},state,{logindraw:action.data})
         }
+        case 'groupdraw' : {
+            return Object.assign({},state,{groupdraw:action.data})
+        }
         default :{
             return  Object.assign({},state);
         }
@@ -65,8 +71,12 @@ function now(state,action){
                 nowgroupid:action.data.id,
                 nowgroupname:action.data.groupname,
                 nowgroupcreater:action.data.creater,
-                nowgroupimg:action.data.groupimg
+                nowgroupimg:action.data.groupimg,
+                index:action.data.index
             })
+        }
+        case 'information' : {
+            return Object.assign({},state,{ information:action.data })
         }
         default :{
             return  Object.assign({},state);
@@ -88,10 +98,14 @@ function group(state,action){
             return Object.assign({},state,{grouplist:grlist})
         }
         case 'deletesearchmes' : {
-            var grsearch = state.searchmes;console.log(state.searchmes,grsearch);
+            var grsearch = state.searchmes;
             grsearch.splice(action.data,1);
-            
             return Object.assign({},state,{searchmes:grsearch})
+        }
+        case 'deleteinf' : {
+            var list  =state.grouplist;
+            list.splice(action.data,1);
+            return Object.assign({},state,{grouplist:list})
         }
         case 'search' : {
             return Object.assign({},state,{searchmes:action.data})

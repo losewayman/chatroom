@@ -205,11 +205,26 @@
     line-height: 32px;
     padding-right: 5px;
 }
-.self_group .ant-list-item:hover{
+.self_group .list_li:hover{
     background-color:#AFEEEE; 
 }
-.self_group .ant-list-item:focus{
+.self_group .list_li:focus{
     background-color:#7bbfea; 
+}
+.list_li{
+    padding:5px 0px;
+}
+.list_img{
+    width:50px;
+    float:left;
+    padding-left: 10px;
+}
+.list_name{
+    overflow: hidden;
+    height:40px;
+    line-height: 40px;
+    box-sizing: border-box;
+    padding-left:10px;
 }
 .list_tip{
     width:100%;
@@ -217,4 +232,65 @@
     text-align: center;
     height:60px;
     overflow: hidden;
+}
+.clearfix{
+    width:330px;
+    height:380px;
+}
+.ant-modal-wrap {
+    z-index: 10000 ;
+}
+.head_title{
+    height:40px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 40px;
+}
+.head_pass input{
+    margin-bottom:20px;
+
+}
+.group_name{
+    width:400px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding-left: 20px;
+    float: left;
+}
+.inf_bu{
+    width:100px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    float: right;
+    font-size: 1.6em;
+}
+.inf_li{
+    overflow: hidden;
+    padding:5px 0px;
+}
+.gr_list{
+    max-height:calc(100vh - 250px);
+    overflow: auto;
+}
+.inf_img{
+    width:30px;
+    float:left;
+}
+.inf_name{
+    overflow: hidden;
+    height:30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    padding-left:10px;
+}
+.inf_out{
+    width:120px;
+}
+.group_title{
+    margin:10px 0px;
+    font-size: 1.1em;
+    font-weight: bold;
 }

@@ -7,6 +7,7 @@ const mapStateToProps = state => ({   //从总的state中拿需要的数据放�
     myself: state.myself,
     groupmes:state.group.groupmes,
     nowgroup:state.now,
+    groupdraws:state.status.groupdraw
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action
@@ -15,6 +16,12 @@ const mapDispatchToProps = dispatch => ({   //分发action
     },
     scroll:(data) => {
         dispatch(action.scroll(data))
+    },
+    information:(data) => {
+        dispatch(action.information(data))
+    },
+    groupdraw:(data) => {
+        dispatch(action.groupdraw(data))
     }
 })
   

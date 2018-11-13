@@ -78,6 +78,24 @@ function deletesearchmes(data){
         data
     }
 }
+function information(data){
+    return {
+        type:"information",
+        data
+    }
+}
+function deleteinf(data){
+    return {
+        type:'deleteinf',
+        data
+    }
+}
+function groupdraw(data){
+    return {
+        type:'groupdraw',
+        data
+    }
+}
 
 const action={
     islogin:islogin,
@@ -91,6 +109,9 @@ const action={
     nowgroup:nowgroup,
     groupmes:groupmes,
     addgrouplist:addgrouplist,
-    deletesearchmes:deletesearchmes
+    deletesearchmes:deletesearchmes,
+    information:information,
+    deleteinf:deleteinf,
+    groupdraw:groupdraw
 }
 export default action;

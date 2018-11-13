@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List, Avatar,Icon,Drawer } from 'antd';
+import Groupmes from './Groupmes';
+import axios from 'axios';
 
 
 class Shows extends Component {
@@ -8,6 +10,30 @@ class Shows extends Component {
     this.state={}
     this.showbody =  React.createRef();
   }
+
+  groupclose = () => {
+    this.props.groupdraw(false);
+  }
+
+  groupopen = () => {
+    this.props.groupdraw(true);
+    axios({
+      method:"post",
+      url:'http://localhost:8110/group/groupinf',
+      data:{
+        'groupid':this.props.nowgroup.nowgroupid
+      }
+    })
+    .then((res)=>{
+      if(res.data.status===200){
+        this.props.information(res.data.data);
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
   componentDidMount(){
     this.props.scroll(this.showbody.current);
   }
@@ -15,8 +41,8 @@ class Shows extends Component {
     return (
       <div className="show">
         <div className="show_top">
-        <div className="group_name">{this.props.nowgroup.nowgroupname}</div>
-        <div className="inf_bu"></div>
+          <div className="group_name">{this.props.nowgroup.nowgroupname}</div>
+          <div className="inf_bu"><Icon type="appstore" onClick={this.groupopen}/></div>
         </div>
         <div className="show_body" ref={this.showbody}>
         {this.props.groupmes.map((mess,index)=>
@@ -32,11 +58,11 @@ class Shows extends Component {
               </div>
             </div>
           </div>)
-
         )}
-          
-          
         </div>
+        <Drawer placement='right'  closable={false}  onClose={this.groupclose}  visible={this.props.groupdraws} width={400}  >
+          <Groupmes/>
+        </Drawer>
       </div>
     );
   }

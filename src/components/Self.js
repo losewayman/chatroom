@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Avatar, Input, Select, Icon, List,Popover, Button, message} from 'antd';
+import { Avatar, Input, Select, List,Popover, Button, message, Upload, Icon, Modal} from 'antd';
 import Addsearch from './Search';
 import Creategroup from './Creategroup';
+import Headup from './Headup';
 import axios from 'axios';
 import action from '../actions/index';
 import method from './method';
@@ -37,8 +38,9 @@ class Self extends Component {
     }
     }
 
-    click = (item) => {
+    click = (item,index) => {
       let _this =this;
+      item.index=index;
       this.props.socket.emit("join",item);
       this.props.nowgroup(item);
       console.log(item);
@@ -49,8 +51,10 @@ class Self extends Component {
       return (
         <div>
         <div className="self_head">
+          <Popover content={<Headup/>} placement="rightTop" trigger="click">
             <Avatar size={50} src={this.props.myself.headimg} icon="user"/>
             <span>{this.props.myself.name}</span>
+          </Popover>
         </div>
         <div className="self_search">
             <Popover content={<Addsearch/>} placement="bottom" trigger="click">
@@ -61,13 +65,14 @@ class Self extends Component {
             </Popover>
         </div>
         <div className="self_group" style={{display:this.props.grouplist.length==0?'none':'block'}}>
-        
-          <List itemLayout="horizontal" dataSource={this.props.grouplist} 
-              renderItem={ item => ( <List.Item tabIndex='1'  style={{paddingLeft:"10px"}}  onClick={this.click.bind(this,item)}>
-                             <List.Item.Meta avatar={<Avatar src={item.groupimg} icon="message"/>} description={item.groupname}/></List.Item>
-                          )}
-          />
-           
+          {this.props.grouplist.map((item,index)=>
+            (
+              <div tabIndex='1' className="list_li" key={index}  onClick={this.click.bind(this,item,index)}>
+                <div className="list_img"><Avatar size={40} src={item.groupimg} icon="message"/></div>
+                <div className="list_name">{item.groupname}</div>
+              </div>
+            )
+          )}
         </div>
         <div className="list_tip" style={{display:this.props.grouplist.length==0?'block':'none'}}>搜索加入“公共地带”一起玩吧！</div>
         </div>

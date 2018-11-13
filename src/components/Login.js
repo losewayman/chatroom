@@ -71,7 +71,6 @@ class Login extends Component {
                 this.props.socket.emit("join",res.data.group[0]);
                 method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
               }
-
           }
           
       })
