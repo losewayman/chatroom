@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { Avatar, Input, Select, List,Popover, Button, message, Upload, Icon, Modal} from 'antd';
+import { Avatar, Input,Popover, message, Icon} from 'antd';
 import Addsearch from './Search';
 import Creategroup from './Creategroup';
 import Headup from './Headup';
 import axios from 'axios';
-import action from '../actions/index';
 import method from './method';
 
-const Option = Select.Option;
 const Search = Input.Search;
 
 class Self extends Component {
     constructor(props){
         super(props);
+        this.state={}
     }
 
     search = (value) => {
@@ -28,7 +27,7 @@ class Self extends Component {
         }
       })
       .then((res)=>{
-        if(res.data.status=='200'){
+        if(res.data.status===200){
           this.props.search(res.data.data);
         }
       })
@@ -43,7 +42,6 @@ class Self extends Component {
       item.index=index;
       this.props.socket.emit("join",item);
       this.props.nowgroup(item);
-      console.log(item);
       method.reqgroupmes(item.id,_this.props.groupmes);
     }
 
@@ -53,18 +51,18 @@ class Self extends Component {
         <div className="self_head">
           <Popover content={<Headup/>} placement="rightTop" trigger="click">
             <Avatar size={50} src={this.props.myself.headimg} icon="user"/>
-            <span>{this.props.myself.name}</span>
+            <span style={{paddingLeft:'10px',fontWeight:'bold',fontSize:'1.1em'}}>{this.props.myself.username}</span>
           </Popover>
         </div>
         <div className="self_search">
             <Popover content={<Addsearch/>} placement="bottom" trigger="click">
-                <Search placeholder="input search text" style={{width:'75%'}} onSearch={this.search} />
+                <Search placeholder="搜索加入群聊！" style={{width:'75%'}} onSearch={this.search} />
             </Popover>
             <Popover placement="bottom" content={<Creategroup/>}  trigger="click">
               <Icon type="plus-circle" style={{fontSize:'32px',position:'relative',top:'6px',left:'5%',color:'#a1a3a6'}} />
             </Popover>
         </div>
-        <div className="self_group" style={{display:this.props.grouplist.length==0?'none':'block'}}>
+        <div className="self_group" style={{display:this.props.grouplist.length===0?'none':'block'}}>
           {this.props.grouplist.map((item,index)=>
             (
               <div tabIndex='1' className="list_li" key={index}  onClick={this.click.bind(this,item,index)}>
@@ -74,7 +72,7 @@ class Self extends Component {
             )
           )}
         </div>
-        <div className="list_tip" style={{display:this.props.grouplist.length==0?'block':'none'}}>搜索加入“公共地带”一起玩吧！</div>
+        <div className="list_tip" style={{display:this.props.grouplist.length===0?'block':'none'}}>搜索加入“公共地带”一起玩吧！</div>
         </div>
       )
   }

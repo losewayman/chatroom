@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import action from '../actions/index';
-import { Avatar, Button, Radio, Drawer, Tabs, Input, Upload, Icon, Modal,message } from 'antd';
+import { Avatar, Button, Upload, Icon, Modal } from 'antd';
 import axios from 'axios';
-import jz from '../img/jz.gif';
-import method from './method';
 
-const Search = Input.Search;
 
 class Groupmes extends Component {
   constructor(props){
@@ -14,14 +11,21 @@ class Groupmes extends Component {
     this.state = {
         previewVisible: false,
         previewImage: '',
-        fileList: [{
-          uid: '-1',
-          name: 'image',
-          status: 'done',
-          url: 'http://localhost:8110/public/images/e7b983453bbe11cfc6a3df6a361154cc.jpg',
-        }],
+        fileList: [],
       };
 
+  }
+
+  componentDidMount(){
+    var obj = [{
+      uid: '-1',
+      name: 'image',
+      status: 'done',
+      url:this.props.now.nowgroupimg,
+    }]
+    this.setState({
+      fileList:obj
+    })
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
@@ -35,7 +39,6 @@ class Groupmes extends Component {
   
     handleChange = ({ file,fileList }) => {
         if(file.status==="done"){
-          console.log(file.response);
           if(fileList.length>1){
             fileList.shift();
           }

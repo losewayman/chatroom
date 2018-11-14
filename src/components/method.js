@@ -44,7 +44,7 @@ function reqgroupmes(groupid,callback){
     }
   })
   .then((res)=>{
-    if(res.data.status==200){
+    if(res.data.status===200){
         callback(res.data.data)
     }
   })

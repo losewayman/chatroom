@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Radio, Icon, Drawer, Tabs, Input, message } from 'antd';
+import { Button, Tabs, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import action from '../actions/index';
@@ -61,16 +61,16 @@ class Login extends Component {
           withCredentials: true,
       })
       .then((res)=>{
-          if(res.data.status=='200'){
+          if(res.data.status===200){
               this.props.selfmes(res.data.user);
               this.props.grouplist(res.data.group);
               this.props.islogin(res.data.islogin);
-              this.props.logindraw(false);
-              if(res.data.group.length!=0){
+              if(res.data.group.length!==0){
                 this.props.nowgroup(res.data.group[0]);
                 this.props.socket.emit("join",res.data.group[0]);
                 method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
               }
+              this.props.history.push('/');
           }
           
       })
@@ -89,14 +89,14 @@ class Login extends Component {
         }
     })
     .then((res)=>{
-        if(res.data.status=='200'){
+        if(res.data.status===200){
             this.setState({
                 sign_acc:'',
                 sign_name:'',
                 sign_pass:''
             })
             message.success("注册成功");
-        }else if(res.data.status=='100'){
+        }else if(res.data.status===100){
             message.warning("账号或昵称已存在");
         }
         else{
@@ -111,6 +111,8 @@ class Login extends Component {
 
   render() {
     return (
+      <div>
+      <div className="login_bg"></div>
       <div className="login">
         <Tabs defaultActiveKey="1">
             <TabPane tab="登录" key="1">
@@ -130,6 +132,7 @@ class Login extends Component {
             </TabPane>
         </Tabs>,
       </div>
+      </div>
     );
   }
 }
@@ -148,9 +151,6 @@ const mapDispatchToProps = dispatch => ({   //分发action
     },
     islogin:(data) => {
         dispatch(action.islogin(data));
-    },
-    logindraw:(data) => {
-        dispatch(action.logindraw(data))
     },
     nowgroup:(data) => {
         dispatch(action.nowgroup(data))

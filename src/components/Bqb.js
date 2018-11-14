@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import action from '../actions/index';
-import { Button, Radio, Icon, Drawer, Tabs, Input } from 'antd';
+import {Input } from 'antd';
 import axios from 'axios';
 import jz from '../img/jz.gif';
 import method from './method';
@@ -36,7 +36,6 @@ class Bqb extends Component {
       }
     })
     .then((res)=>{
-      console.log(res);
       if(res.status===200){
         callback(res.data.data.list);
         _this.setState({
@@ -89,14 +88,13 @@ class Bqb extends Component {
   sendimg = (img) =>{
     var message = {
       useraccount:this.props.myself.account,
-      username:this.props.myself.name,
+      username:this.props.myself.username,
       headimg:this.props.myself.headimg,
       groupid:this.props.groupid,
       text:null,
       img:img,
       time:method.Time()
     }
-    console.log(message);
     this.props.socket.emit('sendmes',message);
     this.props.addmes(message);
     setTimeout(()=>{
@@ -112,7 +110,7 @@ class Bqb extends Component {
     return (
       <div className="bqb">
         <div>
-        <Search placeholder="input search text"  onSearch={this.bqbsearch}  enterButton/>
+        <Search placeholder="在这里可以搜索表情包哦！"  onSearch={this.bqbsearch}  enterButton/>
         </div>
         <div>
         </div>

@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Radio, Icon, Drawer, Input, message } from 'antd';
-import Login from './Login';
+import {Icon, Drawer, Input, message } from 'antd';
 import Bqb from './Bqb';
 import method from './method';
-
-const Search = Input.Search;
-const { TextArea } = Input;
 
 class Send extends Component {
   constructor(props){
     super(props);
     this.state={
       sendmes:'',
-      logindraw:false,
       bqbdraw:false,
     }
-  }
-  logindraw = () => {
-    this.props.logindraw(true);
-  }
-
-  loginClose = () => {
-    this.props.logindraw(false);
   }
 
   bqbClose = () => {
@@ -41,7 +29,7 @@ class Send extends Component {
     }else{
     var messages = {
       useraccount:this.props.myself.account,
-      username:this.props.myself.name,
+      username:this.props.myself.username,
       headimg:this.props.myself.headimg,
       groupid:this.props.groupid, 
       text:this.state.sendmes,
@@ -67,21 +55,13 @@ class Send extends Component {
 
 
   render() {
-    const sendbutton = (
-      <span onClick={this.send}>发 送</span>
-)
-    var showsend= this.props.status.islogin?"block":"none";
-    var showmsg= this.props.status.islogin?"none":"black";
+    const sendbutton = (<span onClick={this.send}>发 送</span>)
     return (
       <div className="send">
-        <div style={{display:showsend}}>
+        <div>
           <div className="send_top"><Icon type="smile" theme="outlined" style={{fontSize:'1.5em'}} onClick={this.bqb}/></div>
           <Input className="send_input" addonAfter={sendbutton} placeholder="发射！" value={this.state.sendmes} onChange={this.sendmes} onPressEnter={this.send}/>
         </div>
-        <div style={{display:showmsg}} className="send_login">点击<span className="login_click" onClick={this.logindraw}>登录</span>参与群聊</div>
-        <Drawer  placement='top' closable={false} onClose={this.loginClose} visible={this.props.status.logindraw} className="login_draw">
-          <Login/>
-        </Drawer>
         <Drawer placement='left'  closable={false}  onClose={this.bqbClose}  visible={this.state.bqbdraw} width={500}  >
         <Bqb/>
         </Drawer>

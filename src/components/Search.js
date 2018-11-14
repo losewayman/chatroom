@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Avatar, Button, Radio, Icon, Drawer, Tabs, Input } from 'antd';
+import { Avatar, Button } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import action from '../actions/index';
 
-const TabPane = Tabs.TabPane;
 
 class Search extends Component {
   constructor(props){
     super(props);
+    this.state={}
   }
 
   join = (sear,index) => {
@@ -21,7 +21,7 @@ class Search extends Component {
           }
       })
       .then((res)=>{
-          if(res.data.status=='200'){
+          if(res.data.status===200){
             this.props.addgrouplist(sear);
             this.props.deletesearchmes(index);
           }
@@ -34,7 +34,7 @@ class Search extends Component {
   render() {
     return (
       <div className="search" >
-      <div style={{display:this.props.searchmes.length==0?'none':'block'}}>
+      <div style={{display:this.props.searchmes.length===0?'none':'block'}}>
         {this.props.searchmes.map((sear,index)=>
         (
             <div className="search_li" key={index}>
@@ -45,7 +45,7 @@ class Search extends Component {
         )
         )}
       </div>
-      <div style={{display:this.props.searchmes.length==0?'block':'none',lineHeight:'40px',textAlign:'center'}}>没有找到呦！</div>
+      <div style={{display:this.props.searchmes.length===0?'block':'none',lineHeight:'40px',textAlign:'center'}}>没有找到呦！</div>
       </div>
     );
   }

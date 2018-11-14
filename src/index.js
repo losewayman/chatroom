@@ -5,15 +5,13 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from './reducers/index'
-
-import {addone,addtwo} from './actions/index';
-import App from './components/App'
+import Routes from './components/Route'
 
 const store = createStore(todoApp);
 
 ReactDOM.render(
     <Provider store = {store}>
-        <App />
+        <Routes />
     </Provider>,
     document.getElementById('root'));
-//serviceWorker.unregister();
+serviceWorker.unregister();

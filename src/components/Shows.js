@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Avatar,Icon,Drawer } from 'antd';
+import { Avatar,Icon,Drawer } from 'antd';
 import Groupmes from './Groupmes';
 import axios from 'axios';
 
@@ -11,6 +11,12 @@ class Shows extends Component {
     this.showbody =  React.createRef();
   }
 
+  time = (time) => {
+    if(time!==null){
+      return time.substr(11,5);
+    }
+    
+  }
   groupclose = () => {
     this.props.groupdraw(false);
   }
@@ -47,14 +53,14 @@ class Shows extends Component {
         <div className="show_body" ref={this.showbody}>
         {this.props.groupmes.map((mess,index)=>
 
-          (<div  className={this.props.myself.account == mess.useraccount?'mes_right':'mes_left'} key={index}>
+          (<div  className={this.props.myself.account === mess.useraccount?'mes_right':'mes_left'} key={index}>
             <div className="mes_header"><Avatar size={50} className="mes_headerimg" src={mess.headimg} icon="user"/></div>
             <div className="mes_body">
-              <div className="mes_headtop"><span className="mes_name">{mess.username}</span><span className="mes_time">{mess.time}</span></div>
+              <div className="mes_headtop"><span className="mes_name">{mess.username}</span><span className="mes_time">{this.time(mess.time)}</span></div>
               <div className="mes_desc">
               
                   <div style={{display:mess.text==null?'none':'block'}}><p>{mess.text}</p></div>
-                  <img style={{display:mess.img==null?'none':'block'}} className="mes_img" src={mess.img}/>
+                  <img style={{display:mess.img==null?'none':'block'}} className="mes_img" alt="" src={mess.img}/>
               </div>
             </div>
           </div>)

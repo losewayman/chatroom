@@ -6,7 +6,6 @@ import Sendout from '../containers/Sendout';
 import action from '../actions/index';
 import 'antd/dist/antd.css';
 import './style/App.css'
-import { Button, Radio, Icon, Drawer } from 'antd';
 import axios from 'axios';
 import method from './method';
 
@@ -27,7 +26,6 @@ class App extends Component {
   componentDidMount(){   //挂载
     let _this = this;
     socket.on('othersendmes',function(data){
-      console.log(data);
       if(data.groupid===_this.props.groupid){
         _this.props.addmes(data);
         setTimeout(()=>{
@@ -45,17 +43,19 @@ class App extends Component {
       withCredentials: true,
     })
     .then((res)=>{
-      if(res.data.status=='200'){
-        this.props.islogin(res.data.islogin);
+      this.props.islogin(res.data.islogin);
+      if(res.data.islogin===false){
+          this.props.history.push('login');
+      }
+      if(res.data.status===200){
         this.props.selfmes(res.data.user);
         this.props.grouplist(res.data.group);
-        if(res.data.group.length!=0){
+        if(res.data.group.length!==0){
           this.props.nowgroup(res.data.group[0]);
           socket.emit("join",res.data.group[0]);
           method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
         }
       }
-      console.log(res);
     })
     .catch((err)=>{
       console.log(err);
@@ -66,7 +66,10 @@ class App extends Component {
   }
   render() {
     return (
+      <div><div className="app_bg"></div>
+      <div className="app_opa"></div>
       <div className="App">
+      
         <div className="left">
           <Selfout/>
         </div>
@@ -76,6 +79,7 @@ class App extends Component {
         </div>
       </div>
       
+      </div>
     );
   }
 }

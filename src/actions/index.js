@@ -1,6 +1,5 @@
 
 function islogin(data){
-    console.log(data);
     return {
         type:"islogin",
         data
@@ -45,12 +44,6 @@ function selfmes(data){
 function grouplist(data){
     return {
         type:'grouplist',
-        data
-    }
-}
-function logindraw(data){
-    return {
-        type:'logindraw',
         data
     }
 }
@@ -105,7 +98,6 @@ const action={
     search:search,
     selfmes:selfmes,
     grouplist:grouplist,
-    logindraw:logindraw,
     nowgroup:nowgroup,
     groupmes:groupmes,
     addgrouplist:addgrouplist,

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Radio, Icon, Drawer, Tabs, Input, message } from 'antd';
+import { Button, Input, message } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import action from '../actions/index';
-
-const TabPane = Tabs.TabPane;
 
 class Search extends Component {
   constructor(props){
@@ -21,7 +19,7 @@ class Search extends Component {
   }
 
   gcreate = () => {
-      if(this.state.groupname==''){
+      if(this.state.groupname===''){
           message.warning("群名不能为空");
       }else{
       axios({
@@ -37,7 +35,7 @@ class Search extends Component {
               message.error("创建失败");
           }else if(res.data.status===100){
               message.warning("此群名已被占用");
-          }else if(res.data.status==200){
+          }else if(res.data.status===200){
               this.setState({
                   groupname:''
               })

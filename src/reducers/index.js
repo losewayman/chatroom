@@ -1,15 +1,12 @@
-import { combineReducers } from 'redux'
-
 var model = {
     myself:{
         account:'',
-        name:'',
+        username:'',
         headimg:'',
         autograph:'',
     },
     status:{
         islogin:'',
-        logindraw:false,
         groupdraw:false
     },
     now:{
@@ -36,7 +33,7 @@ function myself(state,action){
         case 'selfmes' : {
             return Object.assign({},state,{
                 account:action.data.account,
-                name:action.data.username,
+                username:action.data.username,
                 headimg:action.data.headimg,
                 autograph:action.data.autograph
             })
@@ -103,9 +100,9 @@ function group(state,action){
             return Object.assign({},state,{searchmes:grsearch})
         }
         case 'deleteinf' : {
-            var list  =state.grouplist;
-            list.splice(action.data,1);
-            return Object.assign({},state,{grouplist:list})
+            var lists  =state.grouplist;
+            lists.splice(action.data,1);
+            return Object.assign({},state,{grouplist:lists})
         }
         case 'search' : {
             return Object.assign({},state,{searchmes:action.data})
@@ -125,7 +122,6 @@ function group(state,action){
 function center(state,action){
     switch (action.type){
         case 'socket' : {
-            console.log(action);
             return Object.assign({},state,{socket:action.data})
         }
         case 'scroll' : {

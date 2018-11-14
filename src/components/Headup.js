@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { Avatar, Button, Radio, Drawer, Tabs, Input, Upload, Icon, Modal,message } from 'antd';
+import React from 'react';
+import { Button, Input, Upload, Icon, Modal,message } from 'antd';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import action from '../actions/index';
-
-const TabPane = Tabs.TabPane;
 
 
 
@@ -17,15 +15,25 @@ class PicturesWall extends React.Component {
       newpass:'',
       previewVisible: false,
       previewImage: '',
-      fileList: [{
-        uid: '-1',
-        name: 'image',
-        status: 'done',
-        url:'',
-      }],
+      fileList: [],
     };
+  
   }
-    
+
+  componentDidMount(){
+    var obj = [{
+      uid: '-1',
+      name: 'image',
+      status: 'done',
+      url:this.props.myself.headimg,
+    }]
+    this.setState({
+      fileList:obj
+    })
+  }
+
+
+
     handleCancel = () => this.setState({ previewVisible: false })
   
     handlePreview = (file) => {
@@ -37,11 +45,12 @@ class PicturesWall extends React.Component {
   
     handleChange = ({ file,fileList }) => {
         if(file.status==="done"){
-          console.log(file.response);
+          var user = this.props.myself;
+          user.headimg = file.response;
+          this.props.selfmes(user);
           if(fileList.length>1){
             fileList.shift();
           }
-          
         }
         this.setState({ fileList })
     }
@@ -56,7 +65,7 @@ class PicturesWall extends React.Component {
         }
       })
       .then((res)=>{
-        if(res.data.status!=200){
+        if(res.data.status!==200){
           message.error(res.data.msg);
         }else{
           message.success(res.data.msg);
@@ -81,12 +90,7 @@ class PicturesWall extends React.Component {
 
     render() {
       const { previewVisible, previewImage, fileList } = this.state;
-      var obj = [{
-        uid: '-1',
-        name: 'image',
-        status: 'done',
-        url:'http://localhost:8110/public/images/' + this.props.myself.headimg,
-      }]
+      
       const uploadButton = (
         <div>
           <Icon type="plus" />
@@ -99,7 +103,7 @@ class PicturesWall extends React.Component {
           <Upload
             action="http://localhost:8110/group/headup"
             listType="picture-card"
-            fileList={obj}
+            fileList={this.state.fileList}
             onPreview={this.handlePreview}
             onChange={this.handleChange}
             data={this.props.myself}
@@ -132,6 +136,9 @@ const mapDispatchToProps = dispatch => ({   //分发action
     },
     deletesearchmes:(data) => {
       dispatch(action.deletesearchmes(data)) 
+    },
+    selfmes:(data) => {
+      dispatch(action.selfmes(data));
     }
 })
   
