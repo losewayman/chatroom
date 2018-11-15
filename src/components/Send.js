@@ -55,12 +55,11 @@ class Send extends Component {
 
 
   render() {
-    const sendbutton = (<span onClick={this.send}>发 送</span>)
     return (
       <div className="send">
         <div>
           <div className="send_top"><Icon type="smile" theme="outlined" style={{fontSize:'1.5em'}} onClick={this.bqb}/></div>
-          <Input className="send_input" addonAfter={sendbutton} placeholder="发射！" value={this.state.sendmes} onChange={this.sendmes} onPressEnter={this.send}/>
+          <Input className="send_input"  placeholder="发射！" value={this.state.sendmes} onChange={this.sendmes} onPressEnter={this.send}/>
         </div>
         <Drawer placement='left'  closable={false}  onClose={this.bqbClose}  visible={this.state.bqbdraw} width={500}  >
         <Bqb/>

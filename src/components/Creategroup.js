@@ -40,6 +40,7 @@ class Search extends Component {
                   groupname:''
               })
               this.props.addgrouplist(res.data.data[0]);  //创建成功后把群插入到群组列表以展示
+              this.props.nowgroup(this.props.grouplist[0]);
           }
       })
       .catch((err)=>{
@@ -59,12 +60,16 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
-    myself: state.myself
+    myself: state.myself,
+    grouplist:state.group.grouplist
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action
     addgrouplist:(data) => {
       dispatch(action.addgrouplist(data)) 
+    },
+    nowgroup:(data) => {
+        dispatch(action.nowgroup(data))
     },
    
 })

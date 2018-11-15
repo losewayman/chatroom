@@ -24,6 +24,7 @@ class Search extends Component {
           if(res.data.status===200){
             this.props.addgrouplist(sear);
             this.props.deletesearchmes(index);
+            this.props.nowgroup(this.props.grouplist[0]);
           }
       })
       .catch((err)=>{
@@ -53,7 +54,8 @@ class Search extends Component {
 
 const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
     myself: state.myself,
-    searchmes:state.group.searchmes
+    searchmes:state.group.searchmes,
+    grouplist:state.group.grouplist
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action
@@ -62,7 +64,10 @@ const mapDispatchToProps = dispatch => ({   //分发action
     },
     deletesearchmes:(data) => {
       dispatch(action.deletesearchmes(data)) 
-    }
+    },
+    nowgroup:(data) => {
+      dispatch(action.nowgroup(data))
+    },
 })
   
   export default connect(

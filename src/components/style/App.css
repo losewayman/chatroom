@@ -7,6 +7,8 @@
     top:7.5%;
     position: absolute;
     overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 3px 3px 25px #72777b;
 }
 .app_bg{
     position: absolute;
@@ -33,11 +35,13 @@
     filter:blur(8px);
 }
 .left{
-    width:30%;
+    width:27%;
     float:left;
+    max-width: 300px;
     height:100%;
     overflow: auto;
     border-right: solid 1px cyan;
+    background-color: rgba(0,191,255,0.4);
 }
 .right{
     height:100%;
@@ -45,10 +49,10 @@
 }
 .self_head{
     box-sizing: border-box;
-    padding:10px 0px 10px 10px;
+    padding:20px 0px 10px 10px;
 }
-.self_search input{
-    outline: none;
+.self_search {
+    padding:10px;
 }
 .self_group{
     overflow: auto;
@@ -70,6 +74,7 @@
 .send{
     height:100px;
     border-top:solid 1px #585eaa;
+    background-color: rgba(248,248,255,0.6)	;
 }
 .send_login{
     height:100px;
@@ -123,6 +128,9 @@
 }
 .send_input{
     height:45px;
+    margin:0px 10px;
+    width:calc(100% - 20px);
+    border-radius: 5px;
     
 }
 .bqb_image{
@@ -246,10 +254,11 @@
     padding-right: 5px;
 }
 .self_group .list_li:hover{
-    background-color:#AFEEEE; 
+    background-color:rgba(151, 255, 255, 0.7); 
 }
 .self_group .list_li:focus{
-    background-color:#7bbfea; 
+    background-color:rgba(0, 244, 255, 0.5); 
+    outline: none;
 }
 .list_li{
     padding:5px 0px;

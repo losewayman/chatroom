@@ -89,6 +89,18 @@ function groupdraw(data){
         data
     }
 }
+function changeimg(data){
+    return {
+        type:'changeimg',
+        data
+    }
+}
+function nowimg(data){
+    return {
+        type:'nowimg',
+        data
+    }
+}
 
 const action={
     islogin:islogin,
@@ -104,6 +116,8 @@ const action={
     deletesearchmes:deletesearchmes,
     information:information,
     deleteinf:deleteinf,
-    groupdraw:groupdraw
+    groupdraw:groupdraw,
+    changeimg:changeimg,
+    nowimg:nowimg
 }
 export default action;

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Button, Tabs, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import action from '../actions/index';
-import method from './method';
 
 const TabPane = Tabs.TabPane;
 
@@ -50,7 +48,6 @@ class Login extends Component {
   }
 
   login = () => {
-      let _this =this;
       axios({
           method:"post",
           url:"http://localhost:8110/users/login",
@@ -62,14 +59,6 @@ class Login extends Component {
       })
       .then((res)=>{
           if(res.data.status===200){
-              this.props.selfmes(res.data.user);
-              this.props.grouplist(res.data.group);
-              this.props.islogin(res.data.islogin);
-              if(res.data.group.length!==0){
-                this.props.nowgroup(res.data.group[0]);
-                this.props.socket.emit("join",res.data.group[0]);
-                method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
-              }
               this.props.history.push('/');
           }
           
@@ -139,25 +128,9 @@ class Login extends Component {
 
 
 const mapStateToProps = state => ({   //从总的state中拿需要的数据放到此组件
-    socket:state.center.socket
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action
-    grouplist:(data) => {
-        dispatch(action.grouplist(data));
-    },
-    selfmes:(data) => {
-        dispatch(action.selfmes(data));
-    },
-    islogin:(data) => {
-        dispatch(action.islogin(data));
-    },
-    nowgroup:(data) => {
-        dispatch(action.nowgroup(data))
-    },
-    groupmes:(data) => {
-        dispatch(action.groupmes(data))
-    }
 })
   
   export default connect(

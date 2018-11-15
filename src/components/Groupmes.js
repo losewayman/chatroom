@@ -39,6 +39,12 @@ class Groupmes extends Component {
   
     handleChange = ({ file,fileList }) => {
         if(file.status==="done"){
+          var data={
+            'index':this.props.now.index,
+            'img':file.response
+          }
+          this.props.changeimg(data);
+          this.props.nowimg(file.response);
           if(fileList.length>1){
             fileList.shift();
           }
@@ -134,6 +140,12 @@ const mapDispatchToProps = dispatch => ({   //分发action
   nowgroup:(data) => {
     dispatch(action.nowgroup(data))
   },
+  changeimg:(data) => {
+    dispatch(action.changeimg(data))
+  },
+  nowimg:(data) => {
+    dispatch(action.nowimg(data))
+  }
 })
 
 export default connect(

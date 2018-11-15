@@ -66,7 +66,7 @@ class Shows extends Component {
           </div>)
         )}
         </div>
-        <Drawer placement='right'  closable={false}  onClose={this.groupclose}  visible={this.props.groupdraws} width={400}  >
+        <Drawer placement='right' destroyOnClose={true} closable={false}  onClose={this.groupclose}  visible={this.props.groupdraws} width={400}  >
           <Groupmes/>
         </Drawer>
       </div>

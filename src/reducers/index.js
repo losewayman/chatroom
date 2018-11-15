@@ -75,6 +75,9 @@ function now(state,action){
         case 'information' : {
             return Object.assign({},state,{ information:action.data })
         }
+        case 'nowimg' : {
+            return Object.assign({},state,{nowgroupimg:action.data})
+        }
         default :{
             return  Object.assign({},state);
         }
@@ -83,7 +86,6 @@ function now(state,action){
 
 function group(state,action){
     switch (action.type){
-        
         case 'addmes' : {
             var list = state.groupmes;
             list.push(action.data);
@@ -93,6 +95,11 @@ function group(state,action){
             var grlist = state.grouplist;
             grlist.push(action.data);
             return Object.assign({},state,{grouplist:grlist})
+        }
+        case 'changeimg' : {
+            var changelist = state.grouplist;
+            changelist[action.data.index].groupimg = action.data.img;
+            return Object.assign({},state,{grouplist:changelist})
         }
         case 'deletesearchmes' : {
             var grsearch = state.searchmes;
