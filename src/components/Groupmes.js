@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import action from '../actions/index';
 import { Avatar, Button, Upload, Icon, Modal } from 'antd';
 import axios from 'axios';
+import method from './method';
 
 
 class Groupmes extends Component {
@@ -53,9 +54,10 @@ class Groupmes extends Component {
         this.setState({ fileList })
     }
     groupout =() => {
+      let _this = this;
         axios({
             method:'post',
-            url:"http://localhost:8110/group/groupout",
+            url:"group/groupout",
             data:{
                 'groupid':this.props.now.nowgroupid,
                 'account':this.props.myself.account
@@ -68,7 +70,12 @@ class Groupmes extends Component {
             list.index = 0;
             this.props.nowgroup(list);
             this.props.socket.emit("leave",this.props.now);
-            
+            method.reqgroupmes(list.id,function(data){
+              _this.props.groupmes(data);
+              setTimeout(()=>{
+                _this.props.showdiv.scrollTop = _this.props.showdiv.scrollHeight;
+              },100)
+            });
         })
         .catch((err)=>{
             console.log(err);
@@ -90,12 +97,13 @@ class Groupmes extends Component {
       <div className="group_title">修改群头像</div>
       <div className="groupimg">
         <Upload
-            action="http://localhost:8110/group/groupup"
+            action="group/groupup"
             listType="picture-card"
             fileList={fileList}
             onPreview={this.handlePreview}
             onChange={this.handleChange}
             data={this.props.now}
+            
           >
             {fileList.length >= 3 ? null : uploadButton}
           </Upload>
@@ -127,7 +135,8 @@ const mapStateToProps = state => ({   //从总的state中拿需要的数据放�
   myself:state.myself,
   socket:state.center.socket,
   grouplist:state.group.grouplist,
-  now:state.now
+  now:state.now,
+  showdiv:state.center.showdiv
 })
 
 const mapDispatchToProps = dispatch => ({   //分发action
@@ -145,7 +154,10 @@ const mapDispatchToProps = dispatch => ({   //分发action
   },
   nowimg:(data) => {
     dispatch(action.nowimg(data))
-  }
+  },
+  groupmes:(data) => {
+    dispatch(action.groupmes(data))
+}
 })
 
 export default connect(

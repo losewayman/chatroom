@@ -10,7 +10,7 @@ import axios from 'axios';
 import method from './method';
 
 import io from 'socket.io-client';
- var socket = io('http://localhost:8110');
+ var socket = io('http://45.40.199.227:8110');
 
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
 
     axios({
       method:'post',
-      url:"http://localhost:8110/users/islogin",
+      url:"users/islogin",
       data:{},
       withCredentials: true,
     })
@@ -53,7 +53,12 @@ class App extends Component {
         if(res.data.group.length!==0){
           this.props.nowgroup(res.data.group[0]);
           socket.emit("join",res.data.group[0]);
-          method.reqgroupmes(res.data.group[0].id,_this.props.groupmes);
+          method.reqgroupmes(res.data.group[0].id,function(data){
+            _this.props.groupmes(data);
+            setTimeout(()=>{
+              _this.props.showdiv.scrollTop = _this.props.showdiv.scrollHeight;
+            },100)
+          });
         }
       }
     })

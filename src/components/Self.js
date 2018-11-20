@@ -20,7 +20,7 @@ class Self extends Component {
       }else{
       axios({
         method:"post",
-        url:'http://localhost:8110/group/searchmes',
+        url:'group/searchmes',
         data:{
           searchvalue:value,
           account:this.props.myself.account
@@ -42,7 +42,12 @@ class Self extends Component {
       item.index=index;
       this.props.socket.emit("join",item);
       this.props.nowgroup(item);
-      method.reqgroupmes(item.id,_this.props.groupmes);
+      method.reqgroupmes(item.id,function(data){
+        _this.props.groupmes(data);
+        setTimeout(()=>{
+          _this.props.showdiv.scrollTop = _this.props.showdiv.scrollHeight;
+        },100)
+      });
     }
 
     render() {

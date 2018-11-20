@@ -24,7 +24,7 @@ class Search extends Component {
       }else{
       axios({
           method:"post",
-          url:'http://localhost:8110/group/create',
+          url:'group/create',
           data:{
               groupname:this.state.groupname,
               creater:this.props.myself.account,

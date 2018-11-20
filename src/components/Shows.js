@@ -25,7 +25,7 @@ class Shows extends Component {
     this.props.groupdraw(true);
     axios({
       method:"post",
-      url:'http://localhost:8110/group/groupinf',
+      url:'group/groupinf',
       data:{
         'groupid':this.props.nowgroup.nowgroupid
       }

@@ -14,7 +14,7 @@ class Search extends Component {
   join = (sear,index) => {
       axios({
           method:'post',
-          url:'http://localhost:8110/group/join',
+          url:'group/join',
           data:{
             groupid:sear.id,
             useraccount:this.props.myself.account

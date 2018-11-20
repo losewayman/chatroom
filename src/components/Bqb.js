@@ -29,7 +29,7 @@ class Bqb extends Component {
     })
     axios({
       method:'post',
-      url:"http://localhost:8110/pabqb/search",
+      url:"pabqb/search",
       data:{
           'keyword':value,
           'page':page

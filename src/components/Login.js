@@ -50,7 +50,7 @@ class Login extends Component {
   login = () => {
       axios({
           method:"post",
-          url:"http://localhost:8110/users/login",
+          url:"/users/login",
           data:{
               account:this.state.login_acc,
               password:this.state.login_pass
@@ -60,6 +60,8 @@ class Login extends Component {
       .then((res)=>{
           if(res.data.status===200){
               this.props.history.push('/');
+          }else{
+            message.error("登录失败");
           }
           
       })
@@ -70,7 +72,7 @@ class Login extends Component {
   sign = () => {
     axios({
         method:"post",
-        url:"http://localhost:8110/users/sign",
+        url:"users/sign",
         data:{
             account:this.state.sign_acc,
             password:this.state.sign_pass,
@@ -107,7 +109,7 @@ class Login extends Component {
             <TabPane tab="登录" key="1">
                 <div className="login_log">
                     <Input placeholder="请输入账号" value={this.state.login_acc}  onChange={this.loginacc}/>
-                    <Input placeholder="请输入密码" value={this.state.login_pass}  onChange={this.loginpass}/>
+                    <Input placeholder="请输入密码" type="password" value={this.state.login_pass}  onChange={this.loginpass}/>
                     <Button type="primary" block onClick={this.login} >登 录</Button>
                 </div>
             </TabPane>
@@ -115,7 +117,7 @@ class Login extends Component {
                 <div className="login_log">
                     <Input placeholder="请输入账号" value={this.state.sign_acc} onChange={this.signacc}/>
                     <Input placeholder="请输入昵称" value={this.state.sign_name} onChange={this.signname}/>
-                    <Input placeholder="请输入密码" value={this.state.sign_pass} onChange={this.signpass}/>
+                    <Input placeholder="请输入密码" value={this.state.sign_pass} type="password" onChange={this.signpass}/>
                     <Button type="primary" block onClick={this.sign} >注 册</Button>
                 </div>
             </TabPane>

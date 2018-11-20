@@ -7,7 +7,8 @@ const mapStateToProps = state => ({   //从总的state中拿需要的数据放�
     myself: state.myself,
     grouplist:state.group.grouplist,
     status:state.status,
-    socket:state.center.socket
+    socket:state.center.socket,
+    showdiv:state.center.showdiv
 })
   
 const mapDispatchToProps = dispatch => ({   //分发action

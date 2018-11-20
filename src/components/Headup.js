@@ -57,7 +57,7 @@ class PicturesWall extends React.Component {
     click = () => {
       axios({
         method:'post',
-        url:'http://localhost:8110/users/updatepass',
+        url:'users/updatepass',
         data:{
           'oldpass':this.state.oldpass,
           'newpass':this.state.newpass,
@@ -107,6 +107,7 @@ class PicturesWall extends React.Component {
             onPreview={this.handlePreview}
             onChange={this.handleChange}
             data={this.props.myself}
+            
           >
             {fileList.length >= 3 ? null : uploadButton}
           </Upload>

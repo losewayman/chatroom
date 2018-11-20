@@ -38,7 +38,7 @@ function createTime()
 function reqgroupmes(groupid,callback){
   axios({
     method:'post',
-    url:"http://localhost:8110/group/groupmes",
+    url:"group/groupmes",
     data:{
       groupid:groupid
     }
