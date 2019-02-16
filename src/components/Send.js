@@ -34,7 +34,9 @@ class Send extends Component {
       groupid:this.props.groupid, 
       text:this.state.sendmes,
       time:method.Time(),
-      img:null
+      img:null,
+      imgwidth:null,
+      imgheight:null
     }
     this.props.socket.emit('sendmes',messages);
     this.props.addmes(messages);

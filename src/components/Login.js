@@ -50,7 +50,7 @@ class Login extends Component {
   login = () => {
       axios({
           method:"post",
-          url:"/users/login",
+          url:"http://localhost:8110/users/login",
           data:{
               account:this.state.login_acc,
               password:this.state.login_pass
@@ -72,7 +72,7 @@ class Login extends Component {
   sign = () => {
     axios({
         method:"post",
-        url:"users/sign",
+        url:"http://localhost:8110/users/sign",
         data:{
             account:this.state.sign_acc,
             password:this.state.sign_pass,

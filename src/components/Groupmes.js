@@ -57,7 +57,7 @@ class Groupmes extends Component {
       let _this = this;
         axios({
             method:'post',
-            url:"group/groupout",
+            url:"http://localhost:8110/group/groupout",
             data:{
                 'groupid':this.props.now.nowgroupid,
                 'account':this.props.myself.account
@@ -94,8 +94,8 @@ class Groupmes extends Component {
     );
     return (
       <div className="groupmes">
-      <div className="group_title">修改群头像</div>
-      <div className="groupimg">
+      <div className="group_title" style={{display:this.props.myself===this.props.now.nowgroupcreater?'none':'block'}} >修改群头像</div>
+      <div className="groupimg"  style={{display:this.props.myself===this.props.now.nowgroupcreater?'none':'block' }} >
         <Upload
             action="group/groupup"
             listType="picture-card"
@@ -123,8 +123,8 @@ class Groupmes extends Component {
             )
 )}
           </div>
-          <div className="group_title">功能</div>
-          <Button className="inf_out" type="danger" onClick={this.groupout} >退出群组</Button>
+          <div className="group_title"  style={{display:this.props.myself===this.props.now.nowgroupcreater?'block':'none'}}>功能</div>
+          <Button className="inf_out" type="danger" onClick={this.groupout}  style={{display:this.props.myself===this.props.now.nowgroupcreater?'block':'none'}}>退出群组</Button>
       </div>
     );
   }

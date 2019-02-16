@@ -25,7 +25,7 @@ class Shows extends Component {
     this.props.groupdraw(true);
     axios({
       method:"post",
-      url:'group/groupinf',
+      url:'http://localhost:8110/group/groupinf',
       data:{
         'groupid':this.props.nowgroup.nowgroupid
       }
@@ -57,10 +57,12 @@ class Shows extends Component {
             <div className="mes_header"><Avatar size={50} className="mes_headerimg" src={mess.headimg} icon="user"/></div>
             <div className="mes_body">
               <div className="mes_headtop"><span className="mes_name">{mess.username}</span><span className="mes_time">{this.time(mess.time)}</span></div>
-              <div className="mes_desc">
+              <div className="mes_desc" style={{display:mess.text===null?'none':'block'}}>
               
-                  <div style={{display:mess.text==null?'none':'block'}}><p>{mess.text}</p></div>
-                  <img style={{display:mess.img==null?'none':'block'}} className="mes_img" alt="" src={mess.img}/>
+                  <div ><p>{mess.text}</p></div>
+              </div>
+              <div className="mes_desc" style={{display:mess.img===null?'none':'block'}} >
+                  <img className="mes_img" alt="" src={mess.img} style={{width:mess.imgwidth+'px',height:mess.imgheight+'px'}}/>
               </div>
             </div>
           </div>)

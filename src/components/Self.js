@@ -11,7 +11,18 @@ const Search = Input.Search;
 class Self extends Component {
     constructor(props){
         super(props);
-        this.state={}
+        this.state={
+          event:''
+        } 
+        this.bacolor=this.bacolor.bind(this);
+        
+    }
+
+    bacolor(e){
+      e.currentTarget.style.backgroundColor='rgba(0, 244, 255, 0.5)';
+     this.setState({
+       event:e.currentTarget
+     })
     }
 
     search = (value) => {
@@ -20,7 +31,7 @@ class Self extends Component {
       }else{
       axios({
         method:"post",
-        url:'group/searchmes',
+        url:'http://localhost:8110/group/searchmes',
         data:{
           searchvalue:value,
           account:this.props.myself.account
@@ -37,7 +48,13 @@ class Self extends Component {
     }
     }
 
-    click = (item,index) => {
+    click = (item,index,e) => {
+      var move = this.state.event;
+      if(move!==''){
+        //move.style.backgroundColor="rgba(0, 244, 255, 0)";
+        move.removeAttribute("style");
+      }
+      this.bacolor(e);
       let _this =this;
       item.index=index;
       this.props.socket.emit("join",item);
@@ -70,7 +87,7 @@ class Self extends Component {
         <div className="self_group" style={{display:this.props.grouplist.length===0?'none':'block'}}>
           {this.props.grouplist.map((item,index)=>
             (
-              <div tabIndex='1' className="list_li" key={index}  onClick={this.click.bind(this,item,index)}>
+              <div className="list_li" key={index}  onClick={this.click.bind(this,item,index)}>
                 <div className="list_img"><Avatar size={40} src={item.groupimg} icon="message"/></div>
                 <div className="list_name">{item.groupname}</div>
               </div>

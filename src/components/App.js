@@ -10,8 +10,8 @@ import axios from 'axios';
 import method from './method';
 
 import io from 'socket.io-client';
- var socket = io('http://45.40.199.227:8110');
-
+ //var socket = io('http://45.40.199.227:8110');
+ var socket = io('http://localhost:8110');
 
 class App extends Component {
   constructor(props){
@@ -38,7 +38,7 @@ class App extends Component {
 
     axios({
       method:'post',
-      url:"users/islogin",
+      url:"http://localhost:8110/users/islogin",
       data:{},
       withCredentials: true,
     })

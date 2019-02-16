@@ -29,7 +29,7 @@ class Bqb extends Component {
     })
     axios({
       method:'post',
-      url:"pabqb/search",
+      url:"http://localhost:8110/pabqb/search",
       data:{
           'keyword':value,
           'page':page
@@ -85,7 +85,7 @@ class Bqb extends Component {
     });
   }
 
-  sendimg = (img) =>{
+  sendimg = (img,e) =>{
     var message = {
       useraccount:this.props.myself.account,
       username:this.props.myself.username,
@@ -93,7 +93,9 @@ class Bqb extends Component {
       groupid:this.props.groupid,
       text:null,
       img:img,
-      time:method.Time()
+      time:method.Time(),
+      imgwidth:e.target.naturalWidth,
+      imgheight:e.target.naturalHeight
     }
     this.props.socket.emit('sendmes',message);
     this.props.addmes(message);

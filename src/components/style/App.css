@@ -256,10 +256,6 @@
 .self_group .list_li:hover{
     background-color:rgba(151, 255, 255, 0.7); 
 }
-.self_group .list_li:focus{
-    background-color:rgba(0, 244, 255, 0.5); 
-    outline: none;
-}
 .list_li{
     padding:5px 0px;
 }
